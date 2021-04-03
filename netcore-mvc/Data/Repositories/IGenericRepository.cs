@@ -16,8 +16,6 @@ namespace Data.Repositories
 
         public Task<IEnumerable<T>> GetAllAsync();
 
-        ApplicationDbContext GetContext();
-
         public Task<IEnumerable<T>> GetWhereAsync(Expression<Func<T, bool>> predicate);
 
         public void Add(T entity);

@@ -1,0 +1,9 @@
+﻿@{
+    ViewBag.Title = "Setting Index";
+    var data = ViewBag.Settings;
+}
+<h1> Setting Works!</h1>
+@foreach (var item in data)
+{
+    <h1>@item.Id</h1>
+}

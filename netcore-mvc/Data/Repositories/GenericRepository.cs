@@ -30,11 +30,6 @@ namespace Data.Repositories
             return await _context.Set<T>().ToListAsync();
         }
 
-        public ApplicationDbContext GetContext()
-        {
-            return _context;
-        }
-
         public async Task<IEnumerable<T>> GetWhereAsync(Expression<Func<T, bool>> predicate)
         {
             return await _context.Set<T>().Where(predicate).ToListAsync();
