@@ -18,9 +18,7 @@ namespace netcore_mvc.Controllers
         // GET: SettingController
         public async Task<ActionResult> Index()
         {
-            var settings = await _settingService.GetAll();
-            ViewBag.Settings = settings;
-            return View();
+            return View(await _settingService.GetAll());
         }
 
         // GET: SettingController/Details/5

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using netcore_mvc.Data;
 
-namespace netcore_mvc.Migrations
+namespace netcore_mvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20210402034315_CreateIdentitySchema")]

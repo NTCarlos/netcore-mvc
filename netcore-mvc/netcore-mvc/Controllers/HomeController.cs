@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using netcore_mvc.Models;
+using netcore_mvc.Data.Models;
 using System.Diagnostics;
 
 namespace netcore_mvc.Controllers

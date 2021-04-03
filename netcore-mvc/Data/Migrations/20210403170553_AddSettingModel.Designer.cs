@@ -3,10 +3,8 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using netcore_mvc.Data;
 
-namespace netcore_mvc.Migrations
+namespace netcore_mvc.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20210403170553_AddSettingModel")]

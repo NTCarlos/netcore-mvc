@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace netcore_mvc.Migrations
+namespace netcore_mvc.Data.Migrations
 {
     public partial class AddSettingModel : Migration
     {
