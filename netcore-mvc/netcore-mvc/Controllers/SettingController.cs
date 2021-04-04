@@ -6,7 +6,7 @@ using Services.DTO;
 using Services.Exceptions;
 using System.Threading.Tasks;
 
-namespace netcore_mvc.Controllers
+namespace WebUI.Controllers
 {
     public class SettingController : Controller
     {
@@ -42,7 +42,8 @@ namespace netcore_mvc.Controllers
         {
             if (ModelState.IsValid)
             {
-                try{
+                try
+                {
                     var created = await _settingService.Add(setting);
                 }
                 catch(CustomException e)
@@ -57,45 +58,53 @@ namespace netcore_mvc.Controllers
         }
 
         // GET: SettingController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            return View(await _settingService.Get(id));
         }
 
         // POST: SettingController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int id, SettingDto setting)
         {
-            try
+            if (ModelState.IsValid)
             {
+                try
+                {
+                    var edited = await _settingService.Update(setting);
+                }
+                catch (CustomException e)
+                {
+                    ModelState.AddModelError(e.HttpCode.ToString(), e.CustomMessage);
+                    return View(setting);
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(setting);
         }
 
         // GET: SettingController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            return View(await _settingService.Get(id));
         }
 
         // POST: SettingController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, SettingDto setting)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var edited = await _settingService.Delete(id);
             }
-            catch
+            catch (CustomException e)
             {
-                return View();
+                ModelState.AddModelError(e.HttpCode.ToString(), e.CustomMessage);
+                return View(setting);
             }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

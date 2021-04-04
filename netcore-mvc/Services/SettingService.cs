@@ -26,6 +26,11 @@ namespace Services
         }
         public async Task<Setting> Get(int id)
         {
+            if(id <= 0)
+            {
+                _logger.LogError("A Setting with that Id was not found.");
+                throw new SettingNotFound();
+            }
             var setting = await _repo.FirstOrDefaultAsync(x => x.Id == id);
 
             if(setting == null)

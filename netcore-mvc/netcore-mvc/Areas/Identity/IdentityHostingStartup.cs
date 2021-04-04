@@ -7,8 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using netcore_mvc.Data;
 
-[assembly: HostingStartup(typeof(netcore_mvc.Areas.Identity.IdentityHostingStartup))]
-namespace netcore_mvc.Areas.Identity
+[assembly: HostingStartup(typeof(WebUI.Areas.Identity.IdentityHostingStartup))]
+namespace WebUI.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

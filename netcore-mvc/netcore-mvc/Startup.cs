@@ -10,12 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using netcore_mvc.Data;
 using Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace netcore_mvc
+namespace WebUI
 {
     public class Startup
     {

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace netcore_mvc
+namespace WebUI
 {
     public class Program
     {

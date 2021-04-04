@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using netcore_mvc.Data.Models;
 using System.Diagnostics;
 
-namespace netcore_mvc.Controllers
+namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
