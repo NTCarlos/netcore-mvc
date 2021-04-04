@@ -3,12 +3,11 @@ using System.Net;
 
 namespace Services.Exceptions.BadRequest
 {
-    public class BaseBadRequestException : Exception
+    public class BaseBadRequestException : CustomException
     {
-        public int HttpCode { get {
+        public new static int HttpCode { get {
                 return Convert.ToInt32(HttpStatusCode.BadRequest);
             } 
         }
-        public string CustomMessage { get; set; }
     }
 }

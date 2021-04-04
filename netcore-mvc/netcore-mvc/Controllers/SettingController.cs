@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Services;
+using Services.DTO;
+using Services.Exceptions;
 using System.Threading.Tasks;
 
 namespace netcore_mvc.Controllers
@@ -36,16 +38,22 @@ namespace netcore_mvc.Controllers
         // POST: SettingController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(SettingDto setting)
         {
-            try
+            if (ModelState.IsValid)
             {
+                try{
+                    var created = await _settingService.Add(setting);
+                }
+                catch(CustomException e)
+                {
+                    ModelState.AddModelError(e.HttpCode.ToString(), e.CustomMessage);
+                    return View(setting);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return View(setting);
         }
 
         // GET: SettingController/Edit/5

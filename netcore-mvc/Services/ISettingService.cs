@@ -13,7 +13,7 @@ namespace Services
         public Task<IEnumerable<Setting>> GetAll();
         public Task<Setting> Add(SettingDto setting);
         public Task<Setting> Get(int id);
-        public Task<Setting> Update(SettingDto setting, int id);
+        public Task<Setting> Update(SettingDto setting);
         public Task<Setting> Delete(int id);
     }
 }

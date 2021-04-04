@@ -26,12 +26,6 @@ namespace Services
         }
         public async Task<Setting> Get(int id)
         {
-            if (id <= 0)
-            {
-                _logger.LogError("Id argument cannot be null.");
-                throw new ArgumentNullException(nameof(id));
-            }
-
             var setting = await _repo.FirstOrDefaultAsync(x => x.Id == id);
 
             if(setting == null)
@@ -43,12 +37,6 @@ namespace Services
         }
         public async Task<Setting> Add(SettingDto setting)
         {
-            if(setting == null)
-            {
-                _logger.LogError("Setting argument cannot be null.");
-                throw new ArgumentNullException(nameof(setting));
-            }
-
             var findSetting = _repo.FirstOrDefaultAsync(x => x.Key == setting.Key).Result;
             if (findSetting != null)
             {
@@ -67,21 +55,9 @@ namespace Services
 
             return newSetting;
         }
-        public async Task<Setting> Update(SettingDto setting, int id)
+        public async Task<Setting> Update(SettingDto setting)
         {
-            if (setting == null)
-            {
-                _logger.LogError("Setting argument cannot be null.");
-                throw new ArgumentNullException(nameof(setting));
-            }
-
-            if (id <= 0)
-            {
-                _logger.LogError("Id argument cannot be null.");
-                throw new ArgumentNullException(nameof(id));
-            }
-
-            var findSetting = _repo.FirstOrDefaultAsync(x => x.Id == id).Result;
+            var findSetting = _repo.FirstOrDefaultAsync(x => x.Id == setting.Id).Result;
             if (findSetting == null)
             {
                 _logger.LogError("A Setting with that Id was not found.");
@@ -98,12 +74,6 @@ namespace Services
         }
         public async Task<Setting> Delete(int id)
         {
-            if (id <= 0)
-            {
-                _logger.LogError("Id argument cannot be null or 0.");
-                throw new ArgumentNullException(nameof(id));
-            }
-
             var findSetting = _repo.FirstOrDefaultAsync(x => x.Id == id).Result;
             if (findSetting == null)
             {
