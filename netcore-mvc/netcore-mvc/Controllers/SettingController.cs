@@ -60,7 +60,15 @@ namespace WebUI.Controllers
         // GET: SettingController/Edit/5
         public async Task<ActionResult> Edit(int id)
         {
-            return View(await _settingService.Get(id));
+            try
+            {
+                return View(await _settingService.Get(id));
+            }
+            catch (CustomException e)
+            {
+                ModelState.AddModelError(e.HttpCode.ToString(), e.CustomMessage);
+                return View();
+            }
         }
 
         // POST: SettingController/Edit/5
@@ -72,12 +80,12 @@ namespace WebUI.Controllers
             {
                 try
                 {
-                    var edited = await _settingService.Update(setting);
+                    await _settingService.Update(setting);
                 }
                 catch (CustomException e)
                 {
                     ModelState.AddModelError(e.HttpCode.ToString(), e.CustomMessage);
-                    return View(setting);
+                    return View();
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -87,7 +95,15 @@ namespace WebUI.Controllers
         // GET: SettingController/Delete/5
         public async Task<ActionResult> Delete(int id)
         {
-            return View(await _settingService.Get(id));
+            try
+            {
+                return View(await _settingService.Get(id));
+            }
+            catch (CustomException e)
+            {
+                ModelState.AddModelError(e.HttpCode.ToString(), e.CustomMessage);
+                return View();
+            }
         }
 
         // POST: SettingController/Delete/5
@@ -97,12 +113,12 @@ namespace WebUI.Controllers
         {
             try
             {
-                var edited = await _settingService.Delete(id);
+                await _settingService.Delete(id);
             }
             catch (CustomException e)
             {
                 ModelState.AddModelError(e.HttpCode.ToString(), e.CustomMessage);
-                return View(setting);
+                return View();
             }
             return RedirectToAction(nameof(Index));
         }

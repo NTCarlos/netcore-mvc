@@ -3,12 +3,14 @@ using System.Net;
 
 namespace Services.Exceptions.BadRequest
 {
-    public class BaseNotFoundException : Exception
+    public class BaseNotFoundException : CustomException
     {
-        public int HttpCode { get { 
-                return Convert.ToInt32(HttpStatusCode.NotFound); 
-            } 
+        public new static int HttpCode
+        {
+            get
+            {
+                return Convert.ToInt32(HttpStatusCode.BadRequest);
+            }
         }
-        public string CustomMessage { get; set; }
     }
 }
