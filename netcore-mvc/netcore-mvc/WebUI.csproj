@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-netcore_mvc-FACED933-F303-4A52-8A25-BD2A1272631F</UserSecretsId>
-    <RootNamespace>netcore_mvc</RootNamespace>
+    <RootNamespace>WebUI</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
