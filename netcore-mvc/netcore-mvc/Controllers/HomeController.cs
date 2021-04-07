@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using netcore_mvc.Models;
-using System;
-using System.Collections.Generic;
+using netcore_mvc.Data.Models;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace netcore_mvc.Controllers
+namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
@@ -24,6 +21,12 @@ namespace netcore_mvc.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Secret()
         {
             return View();
         }
