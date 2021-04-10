@@ -1,6 +1,4 @@
-﻿using Services.Exceptions.BadRequest;
-
-namespace Services.Exceptions.NotFound
+﻿namespace Services.Exceptions.NotFound
 {
     public class SettingNotFound : BaseNotFoundException
     {
