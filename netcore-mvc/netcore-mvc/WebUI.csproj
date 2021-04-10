@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\vendor\datatables\" />
+    <Folder Include="wwwroot\lib\datatables\" />
   </ItemGroup>
 
 </Project>

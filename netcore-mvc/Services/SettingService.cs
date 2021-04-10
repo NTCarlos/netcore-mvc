@@ -16,8 +16,8 @@ namespace Services
         private readonly ILogger _logger;
         public SettingService(IGenericRepository<Setting> repo, ILogger<SettingService> logger)
         {
-            _repo = repo ?? throw new ArgumentNullException(nameof(repo));
-            _logger = logger;
+            _repo = repo ?? throw new ArgumentNotFound(nameof(repo));
+            _logger = logger ?? throw new ArgumentNotFound(nameof(logger));
         }
         public async Task<IEnumerable<Setting>> GetAll()
         {
