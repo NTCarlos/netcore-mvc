@@ -1,10 +1,9 @@
 ﻿using Data.Models;
 using Data.Repositories;
 using Microsoft.Extensions.Logging;
-using Services.DTO;
-using Services.Exceptions.BadRequest;
-using Services.Exceptions.NotFound;
-using System;
+using Common.DTO;
+using Common.Exceptions.BadRequest;
+using Common.Exceptions.NotFound;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

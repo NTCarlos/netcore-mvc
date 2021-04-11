@@ -1,4 +1,4 @@
-﻿namespace Services.Exceptions.NotFound
+﻿namespace Common.Exceptions.NotFound
 {
     public class SettingNotFound : BaseNotFoundException
     {

@@ -1,4 +1,4 @@
-﻿namespace Services.Exceptions.BadRequest
+﻿namespace Common.Exceptions.BadRequest
 {
     public class KeyAlreadyExistException : BaseBadRequestException
     {
