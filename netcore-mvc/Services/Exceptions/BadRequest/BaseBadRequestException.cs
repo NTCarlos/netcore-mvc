@@ -5,12 +5,9 @@ namespace Services.Exceptions.BadRequest
 {
     public class BaseBadRequestException : CustomException
     {
-        public new static int HttpCode
+        public BaseBadRequestException()
         {
-            get
-            {
-                return Convert.ToInt32(HttpStatusCode.BadRequest);
-            }
+            HttpCode = Convert.ToInt32(HttpStatusCode.BadRequest);
         }
     }
 }
