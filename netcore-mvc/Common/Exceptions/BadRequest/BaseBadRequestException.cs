@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Services.Exceptions.BadRequest
+namespace Common.Exceptions.BadRequest
 {
     public class BaseBadRequestException : CustomException
     {

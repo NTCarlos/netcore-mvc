@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Services.Exceptions
+namespace Common.Exceptions
 {
     public class CustomException : Exception
     {

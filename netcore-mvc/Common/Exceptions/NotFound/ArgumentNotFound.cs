@@ -1,6 +1,6 @@
-﻿namespace Services.Exceptions.NotFound
+﻿namespace Common.Exceptions.NotFound
 {
-    class ArgumentNotFound: BaseNotFoundException
+    public class ArgumentNotFound: BaseNotFoundException
     {
         public ArgumentNotFound(string nameof) : base()
         {

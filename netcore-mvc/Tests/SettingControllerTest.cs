@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using netcore_mvc.Data;
 using Services;
-using Services.DTO;
+using Common.DTO;
 using System.Threading.Tasks;
 using WebUI.Controllers;
 using Xunit;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Services.Exceptions.NotFound
+namespace Common.Exceptions.NotFound
 {
     public class BaseNotFoundException : CustomException
     {
