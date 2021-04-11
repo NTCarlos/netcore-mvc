@@ -63,7 +63,7 @@ namespace Tests
         public void SuccessfullyCreateActionShouldReturnRedirectToAction()
         {
             // ARRANGE
-            SettingDto fakeSetting = new SettingDto
+            SettingDto fakeSetting = new()
             {
                 Key = "fakeKey",
                 Value = "fakeValue"
@@ -79,6 +79,29 @@ namespace Tests
             // ASSERT
 
             Assert.Equal("Index", taskResult.ActionName);
+        }
+
+        [Fact(DisplayName = "Duplicated Key on  Create Action Should Return Bad Request")]
+        public void DuplicatedKeyonCreateActionShouldReturnBadRequest()
+        {
+            // ARRANGE
+            SettingDto duplicatedSetting = new()
+            {
+                Key = "someKey",
+                Value = "someValue"
+            };
+
+            using var context = new ApplicationDbContext(ContextOptions);
+            var mockService = new SettingService(new GenericRepository<Setting>(context), new Mock<ILogger<SettingService>>().Object);
+            var mockController = new SettingController(mockService);
+
+            // ACT
+            var taskResult = (ViewResult)mockController.Create(duplicatedSetting).Result;
+
+            // ASSERT
+
+            Assert.True(taskResult.ViewData.ModelState.ErrorCount > 0);
+            Assert.True(taskResult.ViewData.ModelState.ContainsKey("400"));
         }
     }
 }
