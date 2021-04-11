@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using netcore_mvc.Data;
 using Services;
-using System.Collections;
+using Services.DTO;
 using System.Threading.Tasks;
 using WebUI.Controllers;
 using Xunit;
@@ -57,6 +57,28 @@ namespace Tests
             Assert.NotNull(taskResult);
             Assert.NotNull(taskResult.Model);
             Assert.True(string.IsNullOrEmpty(taskResult.ViewName) || taskResult.ViewName == "Index");
+        }
+
+        [Fact(DisplayName = "Successfully Create Action Should Return Redirect To Action")]
+        public void SuccessfullyCreateActionShouldReturnRedirectToAction()
+        {
+            // ARRANGE
+            SettingDto fakeSetting = new SettingDto
+            {
+                Key = "fakeKey",
+                Value = "fakeValue"
+            };
+
+            using var context = new ApplicationDbContext(ContextOptions);
+            var mockService = new SettingService(new GenericRepository<Setting>(context), new Mock<ILogger<SettingService>>().Object);
+            var mockController = new SettingController(mockService);
+
+            // ACT
+            var taskResult = (RedirectToActionResult)mockController.Create(fakeSetting).Result;
+
+            // ASSERT
+
+            Assert.Equal("Index", taskResult.ActionName);
         }
     }
 }
