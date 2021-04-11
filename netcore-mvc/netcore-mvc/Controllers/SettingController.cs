@@ -11,11 +11,9 @@ namespace WebUI.Controllers
     public class SettingController : Controller
     {
         private readonly ISettingService _settingService;
-        private readonly ILogger<SettingController> _logger;
-        public SettingController(ISettingService settingService, ILogger<SettingController> logger)
+        public SettingController(ISettingService settingService)
         {
             _settingService = settingService;
-            _logger = logger;
         }
         // GET: SettingController
         public async Task<ActionResult> Index()

@@ -5,12 +5,9 @@ namespace Common.Exceptions.NotFound
 {
     public class BaseNotFoundException : CustomException
     {
-        public new static int HttpCode
+        public BaseNotFoundException()
         {
-            get
-            {
-                return Convert.ToInt32(HttpStatusCode.BadRequest);
-            }
+            HttpCode = Convert.ToInt32(HttpStatusCode.NotFound);
         }
     }
 }
