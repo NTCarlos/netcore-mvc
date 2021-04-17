@@ -1,6 +1,6 @@
 using System;
 
-namespace netcore_mvc.Data.Models
+namespace Common.DTO
 {
     public class ErrorViewModel
     {
