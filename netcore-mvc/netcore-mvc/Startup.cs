@@ -1,4 +1,5 @@
 using Data.Repositories;
+using Data.UoW;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using netcore_mvc.Data;
 using Services;
+using WebUI.ServicesExtension;
 
 namespace WebUI
 {
@@ -25,14 +27,15 @@ namespace WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Inject Services
+            services.ConfigureDbContext(Configuration);
+            
+            // Common Services
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ISettingService, SettingService>();
-            // Use Sqlite for development purposes
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("SQLiteConnection")));
-            services.AddDatabaseDeveloperPageExceptionFilter();
+            //
+ 
+            services.AddRegisteredServices(Configuration);
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
