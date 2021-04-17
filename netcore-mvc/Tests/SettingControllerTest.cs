@@ -10,6 +10,7 @@ using Common.DTO;
 using System.Threading.Tasks;
 using WebUI.Controllers;
 using Xunit;
+using Data.UoW;
 
 namespace Tests
 {
@@ -47,7 +48,7 @@ namespace Tests
         {
             // ARRANGE
             using var context = new ApplicationDbContext(ContextOptions);
-            var mockService = new SettingService(new GenericRepository<Setting>(context), new Mock<ILogger<SettingService>>().Object);
+            var mockService = new SettingService(new UnitOfWork(context), new Mock<ILogger<SettingService>>().Object);
             var mockController = new SettingController(mockService);
 
             // ACT
@@ -70,7 +71,7 @@ namespace Tests
             };
 
             using var context = new ApplicationDbContext(ContextOptions);
-            var mockService = new SettingService(new GenericRepository<Setting>(context), new Mock<ILogger<SettingService>>().Object);
+            var mockService = new SettingService(new UnitOfWork(context), new Mock<ILogger<SettingService>>().Object);
             var mockController = new SettingController(mockService);
 
             // ACT
@@ -92,7 +93,7 @@ namespace Tests
             };
 
             using var context = new ApplicationDbContext(ContextOptions);
-            var mockService = new SettingService(new GenericRepository<Setting>(context), new Mock<ILogger<SettingService>>().Object);
+            var mockService = new SettingService(new UnitOfWork(context), new Mock<ILogger<SettingService>>().Object);
             var mockController = new SettingController(mockService);
 
             // ACT
