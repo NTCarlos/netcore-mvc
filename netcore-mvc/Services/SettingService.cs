@@ -6,21 +6,22 @@ using Common.Exceptions.BadRequest;
 using Common.Exceptions.NotFound;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Data.UoW;
 
 namespace Services
 {
     public class SettingService : ISettingService
     {
-        private readonly IGenericRepository<Setting> _repo;
+        private readonly IUnitOfWork _uow;
         private readonly ILogger _logger;
-        public SettingService(IGenericRepository<Setting> repo, ILogger<SettingService> logger)
+        public SettingService(IUnitOfWork uow, ILogger<SettingService> logger)
         {
-            _repo = repo ?? throw new ArgumentNotFound(nameof(repo));
+            _uow = uow;
             _logger = logger ?? throw new ArgumentNotFound(nameof(logger));
         }
         public async Task<IEnumerable<Setting>> GetAll()
         {
-            var settings = await _repo.GetAllAsync();
+            var settings = await _uow.SettingsRepository.GetAllAsync();
             return settings;
         }
         public async Task<Setting> Get(int id)
@@ -30,7 +31,7 @@ namespace Services
                 _logger.LogError("A Setting with that Id was not found.");
                 throw new SettingNotFound();
             }
-            var setting = await _repo.FirstOrDefaultAsync(x => x.Id == id);
+            var setting = await _uow.SettingsRepository.FirstOrDefaultAsync(x => x.Id == id);
 
             if(setting == null)
             {
@@ -41,7 +42,7 @@ namespace Services
         }
         public async Task<Setting> Add(SettingDto setting)
         {
-            var findSetting = _repo.FirstOrDefaultAsync(x => x.Key == setting.Key).Result;
+            var findSetting = _uow.SettingsRepository.FirstOrDefaultAsync(x => x.Key == setting.Key).Result;
             if (findSetting != null)
             {
                 _logger.LogError("A Setting with that Key already exist.");
@@ -54,14 +55,14 @@ namespace Services
                 Value = setting.Value
             };
 
-            _repo.Add(newSetting);
-            await _repo.SaveChangesAsync();
+            _uow.SettingsRepository.Add(newSetting);
+            await _uow.CommitAsync();
 
             return newSetting;
         }
         public async Task<Setting> Update(SettingDto setting)
         {
-            var findSetting = _repo.FirstOrDefaultAsync(x => x.Id == setting.Id).Result;
+            var findSetting = _uow.SettingsRepository.FirstOrDefaultAsync(x => x.Id == setting.Id).Result;
             if (findSetting == null)
             {
                 _logger.LogError("A Setting with that Id was not found.");
@@ -71,22 +72,22 @@ namespace Services
             findSetting.Key = setting.Key;
             findSetting.Value = setting.Value;
 
-            _repo.Update(findSetting);
-            await _repo.SaveChangesAsync();
+            _uow.SettingsRepository.Update(findSetting);
+            await _uow.CommitAsync();
 
             return findSetting;
         }
         public async Task<Setting> Delete(int id)
         {
-            var findSetting = _repo.FirstOrDefaultAsync(x => x.Id == id).Result;
+            var findSetting = _uow.SettingsRepository.FirstOrDefaultAsync(x => x.Id == id).Result;
             if (findSetting == null)
             {
                 _logger.LogError("A Setting with that Id was not found.");
                 throw new SettingNotFound();
             }
 
-            _repo.Delete(findSetting);
-            await _repo.SaveChangesAsync();
+            _uow.SettingsRepository.Delete(findSetting);
+            await _uow.CommitAsync();
 
             return findSetting;
         }

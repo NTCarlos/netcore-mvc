@@ -1,4 +1,5 @@
 using Data.Repositories;
+using Data.UoW;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +31,7 @@ namespace WebUI
             
             // Common Services
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ISettingService, SettingService>();
             //
  
