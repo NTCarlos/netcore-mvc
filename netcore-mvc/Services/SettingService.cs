@@ -1,5 +1,4 @@
 ﻿using Data.Models;
-using Data.Repositories;
 using Microsoft.Extensions.Logging;
 using Common.DTO;
 using Common.Exceptions.BadRequest;

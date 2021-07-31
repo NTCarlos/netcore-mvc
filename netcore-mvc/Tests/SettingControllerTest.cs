@@ -1,5 +1,4 @@
 using Data.Models;
-using Data.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -32,7 +31,7 @@ namespace Tests
 
             if (await context.Settings.AnyAsync() == false)
             {
-                await context.Settings.AddAsync(new Data.Models.Setting
+                await context.Settings.AddAsync(new Setting
                 {
                     Id = 1,
                     Key = "someKey",
